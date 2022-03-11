@@ -94,7 +94,7 @@ onUnmounted(() => {
         </div>
 
         <div class="my-4" role="radiogroup">
-          <template v-for="status in Status" :key="status">
+          <div v-for="status in Status" :key="status">
             <input
               class="mr-2 cursor-pointer"
               type="radio"
@@ -107,11 +107,11 @@ onUnmounted(() => {
               :for="status.replace(' ', '-')"
               >{{ status }}</label
             >
-          </template>
+          </div>
         </div>
 
         <div class="my-4" role="radiogroup">
-          <template v-for="priority in Priority" :key="priority">
+          <div v-for="priority in Priority" :key="priority">
             <input
               class="mr-2 cursor-pointer"
               type="radio"
@@ -124,14 +124,14 @@ onUnmounted(() => {
                 priority
               }}</Badge></label
             >
-          </template>
+          </div>
         </div>
       </div>
     </template>
 
     <template #actions>
-      <Button @click="$emit('close')" color="red"> Cancel </Button>
-      <Button @click="handleSubmit" color="green">
+      <Button @click="$emit('close')" color="red" data-testid="cancel-action"> Cancel </Button>
+      <Button @click="handleSubmit" color="green" data-testid="confirm-action">
         {{ action }}
       </Button>
     </template>

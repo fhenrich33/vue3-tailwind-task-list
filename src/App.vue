@@ -74,5 +74,6 @@ const handleAction = (task: Task) => {
     </section>
   </main>
 
+  <!-- eslint-disable-next-line vue/no-multiple-template-root -->
   <NoPurge />
 </template>

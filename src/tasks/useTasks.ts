@@ -32,29 +32,29 @@ const useTasks = () => {
   };
 
   // Supabase / Prisma service.
-  tasks.value = [
-    {
-      id: Date.now() + 1,
-      title: "LinkedIn is cringe",
-      description: "Don't quote me on that.",
-      status: Status.IN_PROGRESS,
-      priority: Priority.HIGH,
-    },
-    {
-      id: Date.now() + 2,
-      title: "Get stickybugged",
-      description: "LOL",
-      status: Status.DONE,
-      priority: Priority.MEDIUM,
-    },
-    {
-      id: Date.now() + 3,
-      title: "Sheeeesh",
-      description: "It's lit fam.",
-      status: Status.BACKLOG,
-      priority: Priority.LOW,
-    },
-  ];
+  // tasks.value = [
+  //   {
+  //     id: Date.now() + 1,
+  //     title: "LinkedIn is cringe",
+  //     description: "Don't quote me on that.",
+  //     status: Status.IN_PROGRESS,
+  //     priority: Priority.HIGH,
+  //   },
+  //   {
+  //     id: Date.now() + 2,
+  //     title: "Get stickybugged",
+  //     description: "LOL",
+  //     status: Status.DONE,
+  //     priority: Priority.MEDIUM,
+  //   },
+  //   {
+  //     id: Date.now() + 3,
+  //     title: "Sheeeesh",
+  //     description: "It's lit fam.",
+  //     status: Status.BACKLOG,
+  //     priority: Priority.LOW,
+  //   },
+  // ];
 
   return {
     tasks,

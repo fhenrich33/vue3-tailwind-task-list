@@ -47,8 +47,8 @@ defineEmits(["edit", "delete"]);
     </template>
 
     <template #actions>
-      <Button @click="$emit('edit')" color="blue"> Edit ✏️ </Button>
-      <Button @click="$emit('delete')" color="red"> Delete ❌ </Button>
+      <Button @click="$emit('edit')" color="blue" data-testid="edit-action"> Edit ✏️ </Button>
+      <Button @click="$emit('delete')" color="red" data-testid="delete-action"> Delete ❌ </Button>
     </template>
   </Card>
 </template>
