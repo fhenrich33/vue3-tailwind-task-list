@@ -1,6 +1,9 @@
 import { ref } from "vue";
 import { Priority, Status, Task } from "./types";
 
+/**
+ * Tasks composable utilities and reactive objects.
+ */
 const useTasks = () => {
   /**
    * Reactive Task list.

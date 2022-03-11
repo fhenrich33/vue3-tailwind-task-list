@@ -1,4 +1,4 @@
-export type Actions = "add" | "edit" | "delete";
+export type Actions = "add" | "edit" | "delete" | "done";
 
 export enum Priority{
   HIGH = "high",
