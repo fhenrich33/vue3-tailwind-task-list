@@ -1,7 +1,6 @@
 import {
   fireEvent,
   render,
-  RenderResult,
   screen,
   waitFor,
 } from "@testing-library/vue";
@@ -24,7 +23,6 @@ describe("Task List", () => {
   it("render correctly", () => {
     const taskList = render(App);
 
-    // screen.debug();
     taskList.getByText("Task list");
   });
 
@@ -53,6 +51,21 @@ describe("Task List", () => {
 
     taskList.getByText(myFirstTask.title);
     taskList.getByText(myFirstTask.description);
+  });
+
+  it("show error message if title and description fields are empty", async () => {
+    const taskList = render(App);
+
+    const addTaskBtn = taskList.getByText(Labels["add"]);
+    await fireEvent.click(addTaskBtn);
+
+    taskList.getByText("Add a new task.");
+
+
+    const confirmAction = taskList.getByTestId("confirm-action");
+    await fireEvent.click(confirmAction);
+
+    taskList.getByText('Title and Description cannot be empty.');
   });
 
   it("can edit a task", async () => {
