@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .task-input {
+    @apply px-3 py-2 w-full border-b-gray-300 border-b mt-1 block bg-white border-slate-300 text-sm shadow-sm placeholder-slate-400
+    focus:outline-none focus:border-sky-500
+    invalid:border-pink-500 invalid:text-pink-600
+    focus:invalid:border-b-pink-500;
+  }
+}

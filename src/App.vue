@@ -1,0 +1,78 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { Task, Labels, Actions } from "./tasks/types";
+import useTasks from "./tasks/useTasks";
+import TaskCard from "./tasks/TaskCard.vue";
+import TaskDialog from "./tasks/TaskDialog.vue";
+import NoPurge from "./components/NoPurge.vue";
+import Button from "./components/Button.vue";
+
+const { tasks, freshTask, addTask, deleteTask, editTask } = useTasks();
+
+const isModalOpen = ref(false);
+const currentTask = ref<Task>();
+const currentAction = ref<Actions>("add");
+
+const openModalWithAction = (
+  selectedAction: typeof currentAction.value,
+  selectedTask: typeof currentTask.value
+) => {
+  currentTask.value = selectedTask;
+  currentAction.value = selectedAction;
+  isModalOpen.value = true;
+};
+
+const handleAction = (task: Task) => {
+  switch (currentAction.value) {
+    case "add":
+      addTask(task);
+      break;
+    case "edit":
+      editTask(task);
+      break;
+    case "delete":
+      deleteTask(task);
+      break;
+  }
+
+  isModalOpen.value = false;
+};
+</script>
+
+<template>
+  <TaskDialog
+    v-if="isModalOpen && currentTask"
+    :task="{ ...currentTask }"
+    :open="isModalOpen"
+    :action="Labels[currentAction]"
+    @close="isModalOpen = false"
+    @action="handleAction"
+  />
+
+  <main class="sm:w-[400px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] mx-auto">
+    <h1 id="task-list-header" label class="text-4xl font-bold my-4">
+      Task list
+    </h1>
+    <Button
+      class="mb-4"
+      color="green"
+      @click="openModalWithAction('add', freshTask)"
+    >
+      {{ Labels["add"] }}
+    </Button>
+    <section
+      aria-labelledby="task-list-header"
+      class="flex items-center gap-4 flex-wrap"
+    >
+      <TaskCard
+        v-for="task in tasks"
+        :key="(task.id as number)"
+        :task="task"
+        @edit="openModalWithAction('edit', task)"
+        @delete="openModalWithAction('delete', task)"
+      />
+    </section>
+  </main>
+
+  <NoPurge />
+</template>
