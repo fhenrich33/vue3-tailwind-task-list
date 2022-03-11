@@ -5,14 +5,11 @@ import Card from "../components/Card.vue";
 import { Task, Status, PriorityColor } from "./types";
 
 defineProps<{ task: Task }>();
-defineEmits(["edit", "delete"]);
+defineEmits(["edit", "delete", "done"]);
 </script>
 
 <template>
-  <Card
-    role="Task card"
-    class="w-[300px] min-w-[300px] h-[240px] min-h-[240px]"
-  >
+  <Card role="group" class="w-[300px] min-w-[300px] h-[240px] min-h-[240px]">
     <template #title>
       <span
         :class="[
@@ -24,7 +21,7 @@ defineEmits(["edit", "delete"]);
           v-if="task.status !== Status.DONE"
           title="Mark as Done"
           aria-label="Mark as Done"
-          @click="task.status = Status.DONE"
+          @click="$emit('done', task)"
         >
           ✅
         </button>
@@ -47,8 +44,12 @@ defineEmits(["edit", "delete"]);
     </template>
 
     <template #actions>
-      <Button @click="$emit('edit')" color="blue" data-testid="edit-action"> Edit ✏️ </Button>
-      <Button @click="$emit('delete')" color="red" data-testid="delete-action"> Delete ❌ </Button>
+      <Button @click="$emit('edit')" color="blue" data-testid="edit-action">
+        Edit ✏️
+      </Button>
+      <Button @click="$emit('delete')" color="red" data-testid="delete-action">
+        Delete ❌
+      </Button>
     </template>
   </Card>
 </template>

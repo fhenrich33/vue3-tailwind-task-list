@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { Task, Labels, Actions } from "./tasks/types";
+import { Task, Labels, Actions, Status } from "./tasks/types";
 import useTasks from "./tasks/useTasks";
 import TaskCard from "./tasks/TaskCard.vue";
 import TaskDialog from "./tasks/TaskDialog.vue";
@@ -13,13 +13,16 @@ const isModalOpen = ref(false);
 const currentTask = ref<Task>();
 const currentAction = ref<Actions>("add");
 
-const openModalWithAction = (
+const promptAction = (
   selectedAction: typeof currentAction.value,
-  selectedTask: typeof currentTask.value
+  selectedTask: typeof currentTask.value,
+  openModal = true
 ) => {
   currentTask.value = selectedTask;
   currentAction.value = selectedAction;
-  isModalOpen.value = true;
+  isModalOpen.value = openModal;
+
+  if (!openModal && currentTask.value) handleAction(currentTask.value);
 };
 
 const handleAction = (task: Task) => {
@@ -32,6 +35,10 @@ const handleAction = (task: Task) => {
       break;
     case "delete":
       deleteTask(task);
+      break;
+    case "done":
+      task.status = Status.DONE;
+      editTask(task);
       break;
   }
 
@@ -53,11 +60,7 @@ const handleAction = (task: Task) => {
     <h1 id="task-list-header" label class="text-4xl font-bold my-4">
       Task list
     </h1>
-    <Button
-      class="mb-4"
-      color="green"
-      @click="openModalWithAction('add', freshTask)"
-    >
+    <Button class="mb-4" color="green" @click="promptAction('add', freshTask)">
       {{ Labels["add"] }}
     </Button>
     <section
@@ -68,8 +71,9 @@ const handleAction = (task: Task) => {
         v-for="task in tasks"
         :key="(task.id as number)"
         :task="task"
-        @edit="openModalWithAction('edit', task)"
-        @delete="openModalWithAction('delete', task)"
+        @done="promptAction('done', task, false)"
+        @edit="promptAction('edit', task)"
+        @delete="promptAction('delete', task)"
       />
     </section>
   </main>
