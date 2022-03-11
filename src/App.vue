@@ -16,13 +16,10 @@ const currentAction = ref<Actions>("add");
 const promptAction = (
   selectedAction: typeof currentAction.value,
   selectedTask: typeof currentTask.value,
-  openModal = true
 ) => {
   currentTask.value = selectedTask;
   currentAction.value = selectedAction;
-  isModalOpen.value = openModal;
-
-  if (!openModal && currentTask.value) handleAction(currentTask.value);
+  isModalOpen.value = true;
 };
 
 const handleAction = (task: Task) => {
@@ -71,7 +68,7 @@ const handleAction = (task: Task) => {
         v-for="task in tasks"
         :key="(task.id as number)"
         :task="task"
-        @done="promptAction('done', task, false)"
+        @done="promptAction('done', task)"
         @edit="promptAction('edit', task)"
         @delete="promptAction('delete', task)"
       />

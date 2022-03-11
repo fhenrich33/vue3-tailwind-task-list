@@ -16,6 +16,7 @@ export enum Labels {
   "add" = "Add Task 📝",
   "edit" = "Edit ✏️",
   "delete" = "Delete ❌",
+  "done" = "Done ✅ ",
 }
 
 export enum PriorityColor {

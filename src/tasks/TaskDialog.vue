@@ -23,8 +23,13 @@ const actionCopy = () => {
   if (props.action === Labels["edit"]) return `Editing "${props.task.title}"`;
   if (props.action === Labels["delete"])
     return `Do you want to delete "${props.task.title}"?`;
+  if (props.action === Labels["done"])
+    return `Do you want to mark "${props.task.title}" as done?`;
   return "Add a new task.";
 };
+
+const showForm = () =>
+  props.action !== Labels["delete"] && props.action !== Labels["done"];
 
 const handleEsc = (e: KeyboardEvent) => {
   if (e.key === "Escape") emits("close");
@@ -71,7 +76,7 @@ onUnmounted(() => {
         Title and Description cannot be empty.
       </p>
 
-      <div v-if="action !== Labels['delete']" class="my-4">
+      <div v-if="showForm()" class="my-4">
         <div class="my-4" role="group">
           <label class="mr-2" for="title">Title</label>
           <input
@@ -130,7 +135,9 @@ onUnmounted(() => {
     </template>
 
     <template #actions>
-      <Button @click="$emit('close')" color="red" data-testid="cancel-action"> Cancel </Button>
+      <Button @click="$emit('close')" color="red" data-testid="cancel-action">
+        Cancel
+      </Button>
       <Button @click="handleSubmit" color="green" data-testid="confirm-action">
         {{ action }}
       </Button>
