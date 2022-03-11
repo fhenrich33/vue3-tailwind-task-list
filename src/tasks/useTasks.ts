@@ -35,8 +35,8 @@ const useTasks = () => {
   tasks.value = [
     {
       id: Date.now() + 1,
-      title: "Le macacque",
-      description: "Sopa de mamaco.",
+      title: "LinkedIn is cringe",
+      description: "Don't quote me on that.",
       status: Status.IN_PROGRESS,
       priority: Priority.HIGH,
     },
