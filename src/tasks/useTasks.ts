@@ -33,6 +33,7 @@ const useTasks = () => {
   };
 
   const editTask = (task: Task) => {
+    task.date = new Date(task.date).toISOString();
     const selectedTask = tasks.value.find((t) => t.id === task.id);
     tasks.value[tasks.value.indexOf(selectedTask as Task)] = task;
   };

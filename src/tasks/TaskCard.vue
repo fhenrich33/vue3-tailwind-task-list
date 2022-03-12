@@ -8,15 +8,7 @@ import { Task, Status, PriorityColor } from "./types";
 const props = defineProps<{ task: Task }>();
 defineEmits(["edit", "delete", "done"]);
 
-/**
- * Native browser date picker gets the previous date from the bound value, thus this display workaround.
- * Keep in mind that the model still stores the date minus 1 day.
- */
-const correctDate = computed(() => {
-  const nextDay = new Date(props.task.date);
-  nextDay.setDate(nextDay.getDate() + 1);
-  return nextDay;
-});
+const formattedDate = computed(() => new Date(props.task.date).toDateString());
 </script>
 
 <template>
@@ -52,7 +44,7 @@ const correctDate = computed(() => {
 
     <template #default>
       <div>
-        <p class="text-sm mb-1">{{ correctDate.toDateString() }}</p>
+        <p class="text-sm mb-1">{{ formattedDate }}</p>
         <p class="truncate">{{ task.description }}</p>
       </div>
     </template>
