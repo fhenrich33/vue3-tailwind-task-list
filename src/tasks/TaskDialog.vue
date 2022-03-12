@@ -40,7 +40,10 @@ const handleSubmit = () => {
     currentTask.value.title && currentTask.value.description
   );
 
-  if (areFieldsValid.value) emits("action", currentTask.value);
+  if (areFieldsValid.value) {
+    currentTask.value.date = new Date(currentTask.value.date);
+    emits("action", currentTask.value);
+  }
 };
 
 onMounted(() => {

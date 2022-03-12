@@ -19,12 +19,12 @@ const useTasks = () => {
     description: "",
     priority: Priority.LOW,
     status: Status.BACKLOG,
-    date: new Date(),
+    date: new Date().toISOString(),
   };
 
   const addTask = (task: Task) => {
     task.id = Date.now();
-    task.date = new Date();
+    task.date = new Date().toISOString();
     tasks.value = [...tasks.value, task];
   };
 

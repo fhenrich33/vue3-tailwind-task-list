@@ -10,7 +10,7 @@ const taskFactory = (task?: Partial<Task>): Task => {
     description: "My first task description",
     priority: Priority.LOW,
     status: Status.BACKLOG,
-    date: new Date(),
+    date: new Date().toISOString(),
     ...task,
   };
 };
