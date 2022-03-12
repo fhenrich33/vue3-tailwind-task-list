@@ -37,4 +37,5 @@ jobs:
         with:
           node-version: 16.x
       - run: npm install --include=dev
+      - run: npm lint
       - run: npm test
