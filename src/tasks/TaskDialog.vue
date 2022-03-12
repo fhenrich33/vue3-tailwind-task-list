@@ -133,6 +133,16 @@ onUnmounted(() => {
             >
           </div>
         </div>
+
+        <label class="mr-2" for="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          min="2000-01-01"
+          max="2030-12-31"
+          v-model="currentTask.date"
+        />
       </div>
     </template>
 

@@ -15,6 +15,8 @@ const taskFactory = (task?: Partial<Task>): Task => {
   };
 };
 
+beforeEach(() => localStorage.clear());
+
 describe("Task List", () => {
   it("render correctly", () => {
     const taskList = render(App);
@@ -141,4 +143,6 @@ describe("Task List", () => {
       screen.queryByText(myTaskToDelete.description)
     ).not.toBeInTheDocument();
   });
+
+  it.skip("filters tasks by date", () => {});
 });

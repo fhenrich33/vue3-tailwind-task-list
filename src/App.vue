@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { Task, Labels, Actions, Status } from "./tasks/types";
 import useTasks from "./tasks/useTasks";
 import TaskCard from "./tasks/TaskCard.vue";
@@ -13,6 +13,11 @@ const { tasks, freshTask, addTask, deleteTask, editTask } = useTasks();
 const isModalOpen = ref(false);
 const currentTask = ref<Task>();
 const currentAction = ref<Actions>("add");
+const selectedDate = ref();
+const filteredTasks = computed(() => {
+  if (!selectedDate.value) return tasks.value;
+  return tasks.value.filter((t) => t.date === selectedDate.value);
+});
 
 const promptAction = (
   selectedAction: typeof currentAction.value,
@@ -26,7 +31,6 @@ const promptAction = (
 const handleAction = (task: Task) => {
   switch (currentAction.value) {
     case "add":
-      task.id = Date.now();
       addTask(task);
       break;
     case "edit":
@@ -44,6 +48,8 @@ const handleAction = (task: Task) => {
   isModalOpen.value = false;
   taskSerializerService("serialize", tasks.value);
 };
+
+const filterByDate = () => {};
 
 onMounted(() => {
   const savedTasks = taskSerializerService("deserialize");
@@ -68,12 +74,24 @@ onMounted(() => {
     <Button class="mb-4" color="green" @click="promptAction('add', freshTask)">
       {{ Labels["add"] }}
     </Button>
+    <div class="mb-2">
+      <label class="mr-2" for="date">Date</label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        min="2000-01-01"
+        max="2030-12-31"
+        v-model="selectedDate"
+        @input="filterByDate"
+      />
+    </div>
     <section
       aria-labelledby="task-list-header"
       class="flex items-center gap-4 flex-wrap"
     >
       <TaskCard
-        v-for="task in tasks"
+        v-for="task in filteredTasks"
         :key="(task.id as number)"
         :task="task"
         @done="promptAction('done', task)"
