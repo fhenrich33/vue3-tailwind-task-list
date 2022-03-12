@@ -144,5 +144,8 @@ describe("Task List", () => {
     ).not.toBeInTheDocument();
   });
 
+  // TODO: Implement these specs.
+  it.skip("mark tasks as done", () => {});
   it.skip("filters tasks by date", () => {});
+  it.skip("persist tasks", () => {});
 });
