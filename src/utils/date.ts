@@ -1,5 +1,5 @@
 export function compareDays(date1: string, date2: string) {
-  return new Date(date1).getDay() === new Date(date2).getDay();
+  return new Date(date1).toDateString() === new Date(date2).toDateString();
 }
 
 /**
