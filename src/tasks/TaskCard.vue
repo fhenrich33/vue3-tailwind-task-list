@@ -40,7 +40,10 @@ defineEmits(["edit", "delete", "done"]);
     </template>
 
     <template #default>
-      <p class="truncate">{{ task.description }}</p>
+      <div>
+        <p class="text-sm mb-1">{{ task.date.toDateString() }}</p>
+        <p class="truncate">{{ task.description }}</p>
+      </div>
     </template>
 
     <template #actions>

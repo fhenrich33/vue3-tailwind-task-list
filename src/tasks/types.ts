@@ -31,4 +31,5 @@ export interface Task {
   description: string;
   status: Status;
   priority: Priority;
+  date: Date
 }

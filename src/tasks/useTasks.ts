@@ -14,11 +14,12 @@ const useTasks = () => {
    * Task model sample.
    */
   const freshTask: Task = {
-    id: Date.now(),
+    id: 0,
     title: "",
     description: "",
     priority: Priority.LOW,
     status: Status.BACKLOG,
+    date: new Date(),
   };
 
   const addTask = (task: Task) => {

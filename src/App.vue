@@ -15,7 +15,7 @@ const currentAction = ref<Actions>("add");
 
 const promptAction = (
   selectedAction: typeof currentAction.value,
-  selectedTask: typeof currentTask.value,
+  selectedTask: typeof currentTask.value
 ) => {
   currentTask.value = selectedTask;
   currentAction.value = selectedAction;
@@ -25,6 +25,7 @@ const promptAction = (
 const handleAction = (task: Task) => {
   switch (currentAction.value) {
     case "add":
+      task.id = Date.now();
       addTask(task);
       break;
     case "edit":
@@ -53,7 +54,7 @@ const handleAction = (task: Task) => {
     @action="handleAction"
   />
 
-  <main class="sm:w-[400px] md:w-[700px] lg:w-[1000px] xl:w-[1200px] mx-auto">
+  <main class="sm:w-[80vw] max-w-5xl mx-2 sm:mx-auto">
     <h1 id="task-list-header" label class="text-4xl font-bold my-4">
       Task list
     </h1>
