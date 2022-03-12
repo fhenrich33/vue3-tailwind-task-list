@@ -24,7 +24,7 @@ onUnmounted(() => {
     role="none"
     aria-hidden="true"
   >
-    <Card role="alertdialog" class="max-w-sm min-w-[500px] relative">
+    <Card role="alertdialog" class="sm:min-w-[300px] w-[500px] mx-2 sm:mx-auto relative">
       <template #title>
         <slot name="title" />
       </template>
