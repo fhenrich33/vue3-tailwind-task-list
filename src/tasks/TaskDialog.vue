@@ -105,6 +105,7 @@ onUnmounted(() => {
               type="radio"
               :id="status.replace(' ', '-')"
               :value="status"
+              name="task status"
               v-model="currentTask.status"
             />
             <label
@@ -122,6 +123,7 @@ onUnmounted(() => {
               type="radio"
               :id="priority"
               :value="priority"
+              name="task priority"
               v-model="currentTask.priority"
             />
             <label class="mr-2 cursor-pointer" :for="priority"
