@@ -8,5 +8,5 @@ export function compareDays(date1: string, date2: string) {
 export function compensateNativeDatePickerDay(date: string) {
   const nextDay = new Date(date);
   nextDay.setDate(nextDay.getDate() + 1);
-  return nextDay.toDateString();
+  return nextDay;
 }

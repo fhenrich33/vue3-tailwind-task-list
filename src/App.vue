@@ -7,14 +7,14 @@ import TaskDialog from "./tasks/TaskDialog.vue";
 import NoPurge from "./components/NoPurge.vue";
 import Button from "./components/Button.vue";
 import taskSerializerService from "./tasks/taskSerializer";
-import { compareDays, compensateNativeDatePickerDay } from "./utils/date";
+import { compareDays, compensateNativeDatePickerDay } from "./dateUtils/date";
 
 const { tasks, freshTask, addTask, deleteTask, editTask } = useTasks();
 
 const isModalOpen = ref(false);
 const currentTask = ref<Task>();
 const currentAction = ref<Actions>("add");
-const selectedDate = ref("");
+const selectedDate = ref();
 const filteredTasks = computed(() => {
   if (!selectedDate.value) return tasks.value;
   return tasks.value.filter((t) =>
@@ -40,7 +40,7 @@ const handleAction = (task: Task) => {
       addTask(task);
       break;
     case "edit":
-      task.date = compensateNativeDatePickerDay(task.date);
+      task.date = compensateNativeDatePickerDay(task.date).toDateString();
       editTask(task);
       break;
     case "delete":
