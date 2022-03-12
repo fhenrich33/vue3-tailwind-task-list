@@ -41,7 +41,7 @@ defineEmits(["edit", "delete", "done"]);
 
     <template #default>
       <div>
-        <p class="text-sm mb-1">{{ task.date.toDateString() }}</p>
+        <p class="text-sm mb-1">{{ new Date(task.date).toDateString() }}</p>
         <p class="truncate">{{ task.description }}</p>
       </div>
     </template>

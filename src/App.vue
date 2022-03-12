@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { Task, Labels, Actions, Status } from "./tasks/types";
 import useTasks from "./tasks/useTasks";
 import TaskCard from "./tasks/TaskCard.vue";
 import TaskDialog from "./tasks/TaskDialog.vue";
 import NoPurge from "./components/NoPurge.vue";
 import Button from "./components/Button.vue";
+import taskSerializerService from "./tasks/taskSerializer";
 
 const { tasks, freshTask, addTask, deleteTask, editTask } = useTasks();
 
@@ -41,7 +42,13 @@ const handleAction = (task: Task) => {
   }
 
   isModalOpen.value = false;
+  taskSerializerService("serialize", tasks.value);
 };
+
+onMounted(() => {
+  const savedTasks = taskSerializerService("deserialize");
+  if (savedTasks) tasks.value = savedTasks;
+});
 </script>
 
 <template>
