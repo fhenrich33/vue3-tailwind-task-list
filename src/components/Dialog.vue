@@ -11,16 +11,18 @@ const handleEsc = (e: KeyboardEvent) => {
 
 onMounted(() => {
   window.addEventListener("keyup", handleEsc);
+  document.documentElement.style.overflowY = 'hidden';
 });
 
 onUnmounted(() => {
   window.removeEventListener("keyup", handleEsc);
+  document.documentElement.style.overflowY = 'unset';
 });
 </script>
 
 <template>
   <div
-    class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50"
+    class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 h-screen"
     role="none"
     aria-hidden="true"
   >
