@@ -24,7 +24,6 @@ const useTasks = () => {
 
   const addTask = (task: Task) => {
     task.id = Date.now();
-    task.date = new Date().toISOString();
     tasks.value = [...tasks.value, task];
   };
 

@@ -15,6 +15,7 @@ const isModalOpen = ref(false);
 const currentTask = ref<Task>();
 const currentAction = ref<Actions>("add");
 const selectedDate = ref();
+
 const filteredTasks = computed(() => {
   if (!selectedDate.value) return tasks.value;
   return tasks.value.filter((t) =>
@@ -37,6 +38,7 @@ const promptAction = (
 const handleAction = (task: Task) => {
   switch (currentAction.value) {
     case "add":
+      task.date = compensateNativeDatePickerDay(task.date).toDateString();
       addTask(task);
       break;
     case "edit":
@@ -74,7 +76,7 @@ onMounted(() => {
     @action="handleAction"
   />
 
-  <main class="sm:w-[80vw] max-w-5xl mx-2 sm:mx-auto">
+  <main class="sm:w-[90vw] lg:w-5xl mx-2 sm:mx-auto">
     <h1 id="task-list-header" label class="text-4xl font-bold my-4">
       Task list
     </h1>
