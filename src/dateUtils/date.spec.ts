@@ -14,8 +14,8 @@ describe("Date utils", () => {
   });
 
   it("adds a day to the native picker input value", () => {
-    expect(compensateNativeDatePickerDay(day2).toDateString()).toBe("Thu Mar 03 2022");
-    expect(compensateNativeDatePickerDay(day3).toDateString()).toBe("Fri Mar 03 2023");
-    expect(compensateNativeDatePickerDay(day4).toDateString()).toBe("Thu Apr 20 2023");
+    expect(compensateNativeDatePickerDay(day2).toISOString()).toBe("2022-03-04T00:00:00.000Z");
+    expect(compensateNativeDatePickerDay(day3).toISOString()).toBe("2023-03-04T00:00:00.000Z");
+    expect(compensateNativeDatePickerDay(day4).toISOString()).toBe("2023-04-21T00:00:00.000Z");
   });
 });
