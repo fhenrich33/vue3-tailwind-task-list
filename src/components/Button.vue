@@ -1,6 +1,7 @@
-<script setup lang="ts">
+<script setup lang="ts">import { ButtonHTMLAttributes } from 'vue';
+
 interface Props {
-  btnType?: "button" | "submit" | "reset" | undefined;
+  btnType?: ButtonHTMLAttributes["type"];
   color?: string;
 }
 
