@@ -21,6 +21,7 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <!-- TODO: focus trap dialogs -->
   <div
     class="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 h-screen"
     role="none"

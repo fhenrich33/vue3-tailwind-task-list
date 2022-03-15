@@ -65,6 +65,7 @@ onMounted(() => {
 
     <template #default>
       <p class="truncate">{{ actionCopy() }}</p>
+      <!-- TODO: break form on it's own component -->
       <p v-if="!areFieldsValid" class="text-pink-600">
         Title and Description cannot be empty.
       </p>
