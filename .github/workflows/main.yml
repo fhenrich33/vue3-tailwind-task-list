@@ -36,12 +36,9 @@ jobs:
           if [[ ${GITHUB_REF} == "refs/heads/master" ]]; then
             prodRun="--prod"
           fi
-          
-          echo ${VERCEL_TOKEN}
-          echo ${prodRun}
 
-          npx vercel --token ${VERCEL_TOKEN} --prod
+          npx vercel --token ${VERCEL_TOKEN} $prodRun
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.ORG_ID }}
