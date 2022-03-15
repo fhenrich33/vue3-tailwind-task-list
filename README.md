@@ -1,4 +1,11 @@
-# Task List with Vue 3 + Typescript + Vite + Tailwind
+# Task List [Vue]
+
+## Tech stack
+- Vue 3
+- Typescript
+- Vite
+- TailwindCSS
+- Jest + Vue Testing Library
 
 Demo: https://vue3-tailwind-task-list.vercel.app/
 
@@ -8,22 +15,11 @@ Install dependencies:
 
 > yarn 
 
-or
-
-> npm
-
-Run develop environment:
+Run development:
 
 > yarn dev
-
-or
-
-> npm dev
 
 Run tests:
 
 > yarn test
 
-or
-
-> npm test
