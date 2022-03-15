@@ -67,6 +67,7 @@ describe("Task List", () => {
 
     const { getByLabelText, getByText, getByTestId } = render(App);
 
+    // TODO: make a seed function.
     // Add task
 
     const addTaskBtn = getByText(Labels["add"]);
@@ -98,16 +99,15 @@ describe("Task List", () => {
 
     await fireEvent.update(titleInput, editedTitle);
     await fireEvent.update(descriptionInput, editedDescripion);
-    await fireEvent.click(statusInProgressInput);
-    await fireEvent.click(priorityHighInput);
+    await fireEvent.update(statusInProgressInput, "checked");
+    await fireEvent.update(priorityHighInput, "checked");
 
     await fireEvent.click(confirmActionBtn);
 
     getByText(editedTitle);
     getByText(editedDescripion);
-    // TODO: Fix radio checks.
-    // getByText(Status.IN_PROGRESS);
-    // getByText(Priority.HIGH);
+    getByText(Status.IN_PROGRESS);
+    getByText(Priority.HIGH);
   });
 
   it("can delete a task", async () => {
@@ -144,8 +144,77 @@ describe("Task List", () => {
     ).not.toBeInTheDocument();
   });
 
-  // TODO: Implement these specs.
-  it.skip("mark tasks as done", () => {});
-  it.skip("filters tasks by date", () => {});
-  it.skip("persist tasks", () => {});
+  it("mark tasks as done", async () => {
+    const myFirstTask = taskFactory();
+
+    const taskList = render(App);
+
+    // Add task
+
+    const addTaskBtn = taskList.getByText(Labels["add"]);
+    await fireEvent.click(addTaskBtn);
+
+    taskList.getByText("Add a new task.");
+
+    const titleInput = taskList.getByLabelText("Title");
+    const descriptionInput = taskList.getByLabelText("Description");
+    const confirmAction = taskList.getByTestId("confirm-action");
+
+    await fireEvent.update(titleInput, myFirstTask.title);
+    await fireEvent.update(descriptionInput, myFirstTask.description);
+    await fireEvent.click(confirmAction);
+
+    taskList.getByText(myFirstTask.title);
+    taskList.getByText(myFirstTask.description);
+
+    // mark as done
+
+    const markAsDone = taskList.getByLabelText("Mark as Done");
+
+    await fireEvent.click(markAsDone);
+    await fireEvent.click(confirmAction);
+
+    taskList.getByText(Status.DONE);
+  });
+  it("filters tasks by date", async () => {
+    const myFirstTask = taskFactory();
+
+    const taskList = render(App);
+
+    // Add task
+
+    const addTaskBtn = taskList.getByText(Labels["add"]);
+    await fireEvent.click(addTaskBtn);
+
+    taskList.getByText("Add a new task.");
+
+    const titleInput = taskList.getByLabelText("Title");
+    const descriptionInput = taskList.getByLabelText("Description");
+    const dateInput = taskList.getByTestId("task-date");
+    const confirmAction = taskList.getByTestId("confirm-action");
+
+    await fireEvent.update(titleInput, myFirstTask.title);
+    await fireEvent.update(descriptionInput, myFirstTask.description);
+    await fireEvent.update(dateInput, "2022-03-03");
+    await fireEvent.click(confirmAction);
+
+    taskList.getByText(myFirstTask.title);
+    taskList.getByText(myFirstTask.description);
+
+    // Filter by date
+
+    const dateFilterInput = taskList.getByTestId("filter-date");
+    await fireEvent.update(dateFilterInput, "2022-03-03");
+
+    let taskCards = taskList.queryAllByTestId("task-card");
+    expect(taskCards.length).toBe(1);
+
+    await fireEvent.update(dateFilterInput, "2023-01-01");
+
+    taskCards = taskList.queryAllByTestId("task-card");
+    expect(taskCards.length).toBe(0);
+  });
+  
+  // TODO: Storage persistance spec
+  it.skip("persists tasks", () => {});
 });

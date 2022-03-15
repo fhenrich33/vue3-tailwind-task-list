@@ -82,8 +82,8 @@ onMounted(() => {
       {{ Labels["add"] }}
     </Button>
     <div class="mb-2">
-      <label class="mr-2" for="date">Date</label>
-      <input type="date" id="date" name="date" v-model="selectedDate" />
+      <label class="mr-2" for="filter-date">Date</label>
+      <input type="date" id="filter-date" data-testid="filter-date" name="filter-date" v-model="selectedDate" />
     </div>
     <section
       aria-labelledby="task-list-header"

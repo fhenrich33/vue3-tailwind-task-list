@@ -136,8 +136,8 @@ onUnmounted(() => {
           </div>
         </div>
 
-        <label class="mr-2" for="date">Date</label>
-        <input type="date" id="date" name="date" v-model="currentTask.date" />
+        <label class="mr-2" for="task-date">Date</label>
+        <input type="date" id="task-date" data-testid="task-date" name="task-date" v-model="currentTask.date" />
       </div>
     </template>
 

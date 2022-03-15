@@ -12,7 +12,7 @@ const formattedDate = computed(() => new Date(props.task.date).toDateString());
 </script>
 
 <template>
-  <Card role="group" class="w-[300px] min-w-[300px] h-[240px] min-h-[240px]">
+  <Card role="group" data-testid="task-card" class="w-[300px] min-w-[300px] h-[240px] min-h-[240px]">
     <template #title>
       <span
         :class="[
