@@ -32,10 +32,6 @@ const actionCopy = () => {
 const showForm = () =>
   props.action !== Labels["delete"] && props.action !== Labels["done"];
 
-const handleEsc = (e: KeyboardEvent) => {
-  if (e.key === "Escape") emits("close");
-};
-
 const handleSubmit = () => {
   areFieldsValid.value = Boolean(
     currentTask.value.title && currentTask.value.description
@@ -46,12 +42,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   currentTask.value.date = toNativeDatePickerFormat(currentTask.value.date);
-  window.addEventListener("keyup", handleEsc);
   title.value?.focus();
-});
-
-onUnmounted(() => {
-  window.removeEventListener("keyup", handleEsc);
 });
 </script>
 
