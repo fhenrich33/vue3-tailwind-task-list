@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref, watch } from "vue";
 import Badge from "../components/Badge.vue";
 import Button from "../components/Button.vue";
 import Dialog from "../components/Dialog.vue";
+import { toNativeDatePickerFormat } from "../dateUtils/date";
 import { Task, Labels, Status, Priority, PriorityColor } from "./types";
 
 const props = defineProps<{ task: Task; open: boolean; action: Labels }>();
@@ -44,6 +45,7 @@ const handleSubmit = () => {
 };
 
 onMounted(() => {
+  currentTask.value.date = toNativeDatePickerFormat(currentTask.value.date);
   window.addEventListener("keyup", handleEsc);
   title.value?.focus();
 });
@@ -135,14 +137,7 @@ onUnmounted(() => {
         </div>
 
         <label class="mr-2" for="date">Date</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          min="2000-01-01"
-          max="2030-12-31"
-          v-model="currentTask.date"
-        />
+        <input type="date" id="date" name="date" v-model="currentTask.date" />
       </div>
     </template>
 

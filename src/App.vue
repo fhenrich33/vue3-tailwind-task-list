@@ -58,8 +58,6 @@ const handleAction = (task: Task) => {
   taskSerializerService("serialize", tasks.value);
 };
 
-const filterByDate = () => {};
-
 onMounted(() => {
   const savedTasks = taskSerializerService("deserialize");
   if (savedTasks) tasks.value = savedTasks;
@@ -89,10 +87,7 @@ onMounted(() => {
         type="date"
         id="date"
         name="date"
-        min="2000-01-01"
-        max="2030-12-31"
         v-model="selectedDate"
-        @input="filterByDate"
       />
     </div>
     <section
@@ -101,7 +96,7 @@ onMounted(() => {
     >
       <TaskCard
         v-for="task in filteredTasks"
-        :key="(task.id as number)"
+        :key="Number(task.id)"
         :task="task"
         @done="promptAction('done', task)"
         @edit="promptAction('edit', task)"
