@@ -1,7 +1,8 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/vue";
+import { fireEvent, render, screen } from "@testing-library/vue";
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App.vue";
 import { Labels, Priority, Status, Task } from "./tasks/types";
+import taskSerializerService from "./tasks/taskSerializer";
 
 const taskFactory = (task?: Partial<Task>): Task => {
   return {
@@ -215,6 +216,35 @@ describe("Task List", () => {
     expect(taskCards.length).toBe(0);
   });
   
-  // TODO: Storage persistance spec
-  it.skip("persists tasks", () => {});
+  it("persists tasks", async () => {
+    const myFirstTask = taskFactory();
+
+    const taskList = render(App);
+
+    let taskCards = taskList.queryAllByTestId("task-card");
+    expect(taskCards.length).toBe(0);
+
+    // Add task
+
+    const addTaskBtn = taskList.getByText(Labels["add"]);
+    await fireEvent.click(addTaskBtn);
+
+    taskList.getByText("Add a new task.");
+
+    const titleInput = taskList.getByLabelText("Title");
+    const descriptionInput = taskList.getByLabelText("Description");
+    const dateInput = taskList.getByTestId("task-date");
+    const confirmAction = taskList.getByTestId("confirm-action");
+
+    await fireEvent.update(titleInput, myFirstTask.title);
+    await fireEvent.update(descriptionInput, myFirstTask.description);
+    await fireEvent.update(dateInput, "2022-03-03");
+    await fireEvent.click(confirmAction);
+
+    taskList.getByText(myFirstTask.title);
+    taskList.getByText(myFirstTask.description);
+
+    // Check localStorage
+    expect(Array(taskSerializerService('deserialize')).length).toBe(1);
+  });
 });
