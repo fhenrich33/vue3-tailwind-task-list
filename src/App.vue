@@ -21,7 +21,7 @@ const filteredTasks = computed(() => {
   return tasks.value.filter((t) =>
     compareDays(
       t.date,
-      compensateNativeDatePickerDay(selectedDate.value).toString()
+      compensateNativeDatePickerDay(selectedDate.value).toDateString()
     )
   );
 });
@@ -83,12 +83,7 @@ onMounted(() => {
     </Button>
     <div class="mb-2">
       <label class="mr-2" for="date">Date</label>
-      <input
-        type="date"
-        id="date"
-        name="date"
-        v-model="selectedDate"
-      />
+      <input type="date" id="date" name="date" v-model="selectedDate" />
     </div>
     <section
       aria-labelledby="task-list-header"

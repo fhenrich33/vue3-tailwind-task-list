@@ -1,5 +1,8 @@
+/**
+ * Compare dates by day.
+ */
 export function compareDays(date1: string, date2: string) {
-  return new Date(date1).toISOString() === new Date(date2).toISOString();
+  return new Date(date1).toDateString() === new Date(date2).toDateString();
 }
 
 /**
@@ -12,7 +15,7 @@ export function compensateNativeDatePickerDay(date: string) {
 }
 
 /**
- * Converts a date string to the Native browser date picker format.
+ * Converts a date string to the native browser date picker format.
  */
 export function toNativeDatePickerFormat(date: string) {
   return new Date(date).toISOString().split("T")[0];
