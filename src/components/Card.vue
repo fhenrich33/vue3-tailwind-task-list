@@ -8,7 +8,7 @@
       </h2>
       <slot name="header" />
     </header>
-    <div role="sub-title" class="mb-2">
+    <div role="group" class="mb-2">
       <slot name="sub-title" />
     </div>
     <div class="text-gray-700 text-base mb-4"><slot /></div>

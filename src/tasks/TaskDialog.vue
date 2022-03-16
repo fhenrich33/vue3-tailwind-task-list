@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import Badge from "../components/Badge.vue";
 import Button from "../components/Button.vue";
 import Dialog from "../components/Dialog.vue";
